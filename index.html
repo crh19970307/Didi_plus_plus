@@ -1,0 +1,266 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>Penta Hackathon!</title>  
+<style type="text/css">  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px;}  
+#container{height:100%;}  
+#bar{height:100%;width:20%;float:left;}
+</style>  
+<script type="text/javascript" src=" http://api.map.baidu.com/api?v=2.0&ak=4VZ5pUrH6Hm1qDI0cbIEZLiN4WAyG3Pm  ">
+//v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=4VZ5pUrH6Hm1qDI0cbIEZLiN4WAyG3Pm "
+//v1.4版本及以前版本的引用方式：src="http://api.map.baidu.com/api?v=1.4&key=4VZ5pUrH6Hm1qDI0cbIEZLiN4WAyG3Pm &callback=initialize"
+</script>
+</head>  
+ 
+<body>  
+
+<div id="bar" >
+	<div id ="picture" width=100%;height=20% >
+		<img src="src/logo.png" /img>
+	</div>
+	
+	<div id="text1" class="text" style="width:100%;height:50%;text-align:center;; font-size:24px;background: #DCB5FF; color:black;">
+	WELCOME<br>TO<br>OUR<br>PROJECT<br>D++<br>
+	</div>
+
+<script type="text/javascript">
+function allert()
+{
+	alert("ALERTING.....");
+}//用来测试的函数，统一定义
+function button1click()
+{
+	 //var handleofbar=document.getElementById("text1");
+	 //handleofbar.innerHTML="TEST!";
+	 //asdf
+	 map.clearOverlays();
+	 var point = new BMap.Point(121.437209, 31.024931);  // 创建点坐标  
+map.centerAndZoom(point, 18);  // 初始化地图，设置中心点坐标和地图级别  
+	var handleofbar=document.getElementById("text1");
+		handleofbar.innerHTML="WELCOME<br>TO<br>OUR<br>PROJECT<br>D++<br>";
+	for(var i=0;i<json_data.length;i++)
+	{
+		markerArray[i] = new BMap.Marker(new BMap.Point(json_data[i][0], 		json_data[i][1]),{icon:myIcon}); // 创建点
+		//map.addOverlay(markerArray[i]);    //增加点
+		pointArray[i] = new BMap.Point(json_data[i][0], json_data[i][1]);
+		markerArray[i].setTitle(i);//为每一个标记制定一个编号，等于i，便于区分
+		markerArray[i].addEventListener("onclick",function(e)//直接操作DOM，更改样式
+		{
+		var tmp=this.getTitle();
+	//	alert(tmp);
+	//ghjk
+		var handleofbar=document.getElementById("text1");
+	 	handleofbar.innerHTML="The information <br>of the car is:<br>"+"ID:"+attribute_data[tmp][0]+"<br>Historical_rate:"+attribute_data[tmp][1]+"<br>historical_std:"+attribute_data[tmp][2]+"<br>max_steady:"+attribute_data[tmp][3]+"<br>min_steady:"+attribute_data[tmp][4]+"<br>Like_time:"+attribute_data[tmp][5];
+map.clearOverlays();
+ var i=tmp;
+// var pointCenter=new BMap.Point(fourpoints[tmp][1],fourpoints[tmp][2]);
+// map.setCenter(pointCenter);
+	 	for(var j=0;j<4;j++)
+	 		{
+	 		var tmp1=4*i+j;
+	 var pointCenter=new BMap.Point(fourpoints[tmp1][1],fourpoints[tmp1][2]);
+	 	map.setCenter(pointCenter);
+	 	if(j==0)
+	  circle = new BMap.Circle(pointCenter, fourpoints[tmp1][3]/10, {            strokeColor: "blue",            strokeWeight: 1,            fillColor: "#FF9224",            fillOpacity: 0.0}); 
+	  if (j==1)
+	  circle = new BMap.Circle(pointCenter, fourpoints[tmp1][3]/10, {            strokeColor: "blue",            strokeWeight: 1,            fillColor: "#8CEA00",            fillOpacity: 0.0}); 
+	  if (j==2)
+	  circle = new BMap.Circle(pointCenter, fourpoints[tmp1][3]/10, {            strokeColor: "blue",            strokeWeight: 1,            fillColor: "#0080FF",            fillOpacity: 0.0}); 
+	  if (j==3)
+	  circle = new BMap.Circle(pointCenter, fourpoints[tmp1][3]/10, {            strokeColor: "blue",            strokeWeight: 1,            fillColor: "#FFD306",            fillOpacity: 0.0}); 
+	
+	  	 	    map.addOverlay(circle);      //画到地图上面
+	 	    map.setCenter(pointCenter);
+				}
+ var pointCenter=new BMap.Point((fourpoints[4*i][1]+fourpoints[4*i+1][1]+fourpoints[4*i+2][1]+fourpoints[4*i+3][1])/4	,(fourpoints[4*i][2]+fourpoints[4*i+1][2]+fourpoints[4*i+2][2]+fourpoints[4*i+3][2])/4);
+ map.setCenter(pointCenter);
+		map.setZoom	(11);
+});
+		}
+		var marker0 = new BMap.Marker(pt0,{icon:myIcon0});  
+map.addOverlay(marker0);  //加入当前坐标
+}
+</script>
+
+	<div float="left" id ="downbar" style="width:100%; height:40%; background:##CA8EFF; color:#FFF">
+		<div id="part1" style="float:left;width:50%; height:50%; background: 	#FF9224; color:#FFF">
+		<input  type="button"  value="RESET"  onclick="button1click();" style="width:100%; height:100%;background-color: transparent; border: 0;font-size:26px">
+		</div>
+	
+		<div id="part2" style="float:left;width:50%; height:50%; background: 	#8CEA00; color:#FFF">
+		<input type="button" value="DETECT"onclick="addpoints();" style="width:100%; height:100%;background-color: transparent; border: 0;font-size:26px">
+		</div>
+	
+		<div id="part3"  style="float:left;width:50%; height:50%; background:#0080FF ;color:#FFF">
+		<input type="button" value="SORT" onclick="sorttt()" style="width:100%; height:100%;background-color: transparent; border: 0;font-size:26px">
+		</div>
+		
+		
+			<div id="part4"  style="float:left;width:50%; height:50%; background:#FFD306 ;color:#FFF">
+		<input type="button" value="HELP" onclick="help()" style="width:100%; height:100%;background-color: transparent; border: 0;font-size:26px">
+		</div>
+			
+	</div>   
+</div>
+
+<div id="container"></div> 
+
+<script type="text/javascript"> 
+
+var map = new BMap.Map("container");          // 创建地图实例  
+var point = new BMap.Point(121.437209, 31.024931);  // 创建点坐标  
+map.centerAndZoom(point, 18);  // 初始化地图，设置中心点坐标和地图级别  
+map.enableScrollWheelZoom(); //鼠标滚轮缩放开启
+function help()
+{
+	alert("Help Information\nRESET:  Returns to the initial state\nSort:   return the most stable car and the most honest car\nDETECT:  Check around the taxi\nHelp:  Button description");
+	}
+	function sorttt()
+	{
+			var handleofbar=document.getElementById("text1");
+	 	handleofbar.innerHTML="The sorting result <br>of the car is:<br>"+"ID of the<br>most stable car:<br>13468<br>ID of the<br>most honest car:<br>18204,25242<br>ID of the <br>most fast car:<br>13411";
+	}
+/*
+window.setTimeout(function(){  
+    map.panTo(new BMap.Point(116.409, 39.918));    
+}, 2000);//2秒后移动中心
+*/
+map.addControl(new BMap.NavigationControl());    //添加控件
+map.addControl(new BMap.ScaleControl());    
+map.addControl(new BMap.OverviewMapControl());    
+map.addControl(new BMap.MapTypeControl());    
+map.setCurrentCity("上海"); // 仅当设置城市信息时，MapTypeControl的切换功能才能可用
+var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
+//map.addTileLayer(traffic);                    // 将图层添加到地图上
+
+/*
+	var pt0=new BMap.Point(121.437169, 31.024734);
+	var pt1=new BMap.Point(121.433545, 31.024111);
+	var pt2 = new BMap.Point(121.433846, 31.023469);
+
+	var myIcon = new BMap.Icon("taxi.png", new BMap.Size(40,40));
+	var myIcon0 = new BMap.Icon("doraemon.png", new BMap.Size(100,100));
+	var marker0 = new BMap.Marker(pt0,{icon:myIcon0});  
+	var marker1 = new BMap.Marker(pt1,{icon:myIcon});  // 创建标注
+	var marker2 = new BMap.Marker(pt2,{icon:myIcon});  // 创建标注
+
+	map.addOverlay(marker0);  
+	map.addOverlay(marker1);              // 将标注添加到地图中
+	map.addOverlay(marker2);    
+	marker0.setAnimation(BMAP_ANIMATION_BOUNCE);
+	
+	
+	marker1.addEventListener("click", function(){
+	alert("您点击了标注");
+	});
+*/
+
+var myIcon0 = new BMap.Icon("src/doraemon.png", new BMap.Size(100,100));
+var myIcon = new BMap.Icon("src/taxi.png", new BMap.Size(40,40));
+var pt0=new BMap.Point(121.437169, 31.024734);
+var marker0 = new BMap.Marker(pt0,{icon:myIcon0});  
+map.addOverlay(marker0);  //加入当前坐标
+var json_data = [[121.435943, 31.025631],[121.433545, 31.024111],[121.433846, 31.023469],[121.438198, 31.026645],[121.436904, 31.023334],[121.43968, 31.024262],[121.437793, 31.022916],[121.435174, 31.024648],[121.439037, 31.024037],[121.438417, 31.025561]];//批量加入出租车坐标
+var attribute_data=[[13468.0, 28.5375, 13.4079053951, 'other_time', 'morning','everning'], [15990.0, 25.4675, 13.793574364500001, 'other_time', 'morning','morning'], [20227.0, 34.1224489796, 15.3139027845, 'morning', 'everning','morning'], [16390.0, 35.2169811321, 20.3964456379, 'everning', 'midnight','morning'], [18204.0, 41.9780487805, 20.7701651906, 'other_time', 'everning','everning'], [23395.0, 36.628571428600004, 22.1892754631, 'midnight', 'everning','everning'], [25242.0, 40.138461538499996, 22.965168892199998, 'morning','everning', 'morning'], [25413.0, 38.8275862069, 19.8466517032, 'other_time', 'everning','everning'], [13411.0, 38.0185185185, 24.5601987119, 'other_time', 'midnight','everning'], [16034.0, 40.997619047600004, 29.912367947699998, 'other_time','morning', 'everning']];
+var fourpoints=[[13468,121.49412693939395,31.301707515151513,6180.264251754371,'morning'],[13468,121.48843652564105,31.34981208974361,11.404035777922227,'midnight'],[13468,121.49426492452832,31.286262584905664,14213.373017598618,'everning'],[13468,121.47635346323528,31.344758455882364,21891.474072059904,'other_time'],[15990,121.38505582051283,31.299647948717947,8746.286328431217,'morning'],[15990,121.39390689743585,31.3046343974359,2329.1927671082317,'midnight'],[15990,121.41462907142854,31.303121119047617,4458.0603075887375,'everning'],[15990,121.4025402994923,31.295025868020304,14549.619749203202,'other_time'],[20227,121.48596596666663,31.218502833333332,7036.828673957698,'morning'],[20227,121.42395141428577,31.349397442857143,3.707320463119825,'midnight'],[20227,121.39827574468083,31.19383608510638,4437.66679465928,'everning'],[20227,121.43418442473116,31.220742897849476,14337.853399270827,'other_time'],[16390,121.54762038181819,31.13368609090909,10593.042479698839,'morning'],[16390,121.57661831249997,31.117581156249997,7528.728168115832,'midnight'],[16390,121.48239930508475,31.213608999999995,8183.568672615868,'everning'],[16390,121.57133700925931,31.118254046296286,20644.785724645204,'other_time'],[18204,121.5269035,31.311995624999998,12294.255959136502,'morning'],[18204,121.57461211999994,31.35514804000001,7.716748507365429,'midnight'],[18204,121.52107782758623,31.24159958620689,15499.832142487434,'everning'],[18204,121.58657733684208,31.323888789473692,28362.97945801763,'other_time'],[23395,121.5920123030303,31.179781545454546,22787.81229918225,'morning'],[23395,121.41932182978721,31.356738404255324,15785.257393180185,'midnight'],[23395,121.81753092307692,31.12011892307693,31860.763402941666,'everning'],[23395,121.81650939215686,31.12171623529413,52583.62687913138,'other_time'],[25242,121.41259348000001,31.27742268,17360.263526147373,'morning'],[25242,121.45712755128199,30.86747070512819,5.6107201826840285,'midnight'],[25242,121.43033129166672,31.204259145833344,5250.515367770979,'everning'],[25242,121.41395105223879,31.16771310447761,36900.34230362906,'other_time'],[25413,121.37559088888887,31.201737999999995,5595.296193373879,'morning'],[25413,121.35887029870128,31.246271558441556,27.89634541158818,'midnight'],[25413,121.4608874047619,31.310609476190475,19171.128282511097,'everning'],[25413,121.36732191176475,31.240702539215683,18368.568967915482,'other_time'],[13411,121.44622432258063,31.261529903225806,10980.230179656332,'morning'],[13411,121.44670561971836,31.31070990140846,8717.862729447279,'midnight'],[13411,121.4759075121951,31.312688756097558,12306.881931782475,'everning'],[13411,121.46365540625001,31.30302651875,17866.88928915134,'other_time'],[16034,121.4275402686567,31.217537656716416,4465.969009856763,'morning'],[16034,121.45353702777776,31.34002608333332,7.188403193884334,'midnight'],[16034,121.81386752830191,31.1247265471698,36080.99899114137,'everning'],[16034,121.34349662903229,31.192278870967748,46016.89136532856,'other_time']];
+	var pointArray = new Array();
+ 	var markerArray=new Array();
+	
+	for(var i=0;i<json_data.length;i++)
+	{
+		markerArray[i] = new BMap.Marker(new BMap.Point(json_data[i][0], 		json_data[i][1]),{icon:myIcon}); // 创建点
+		//map.addOverlay(markerArray[i]);    //增加点
+		pointArray[i] = new BMap.Point(json_data[i][0], json_data[i][1]);
+		markerArray[i].setTitle(i);//为每一个标记制定一个编号，等于i，便于区分
+		//alert(markerArray[i].getTitle());
+		markerArray[i].addEventListener("onclick",function(e)//直接操作DOM，更改样式
+		{
+		var tmp=this.getTitle();
+	//	alert(tmp);
+	//ghjk
+		var handleofbar=document.getElementById("text1");
+	 	handleofbar.innerHTML="The information <br>of the car is:<br>"+"ID:"+attribute_data[tmp][0]+"<br>Historical_rate:"+attribute_data[tmp][1]+"<br>historical_std:"+attribute_data[tmp][2]+"<br>max_steady:"+attribute_data[tmp][3]+"<br>min_steady:"+attribute_data[tmp][4]+"<br>Like_time:"+attribute_data[tmp][5];
+map.clearOverlays();
+ var i=tmp;
+// var pointCenter=new BMap.Point(fourpoints[tmp][1],fourpoints[tmp][2]);
+// map.setCenter(pointCenter);
+	 	for(var j=0;j<4;j++)
+	 		{
+	 		var tmp1=4*i+j;
+	 var pointCenter=new BMap.Point(fourpoints[tmp1][1],fourpoints[tmp1][2]);
+	 	map.setCenter(pointCenter);
+	 	if(j==0)
+	  circle = new BMap.Circle(pointCenter, fourpoints[tmp1][3]/10, {            strokeColor: "blue",            strokeWeight: 1,            fillColor: "#FF9224",            fillOpacity: 0.0}); 
+	  if (j==1)
+	  circle = new BMap.Circle(pointCenter, fourpoints[tmp1][3]/10, {            strokeColor: "blue",            strokeWeight: 1,            fillColor: "#8CEA00",            fillOpacity: 0.0}); 
+	  if (j==2)
+	  circle = new BMap.Circle(pointCenter, fourpoints[tmp1][3]/10, {            strokeColor: "blue",            strokeWeight: 1,            fillColor: "#0080FF",            fillOpacity: 0.0}); 
+	  if (j==3)
+	  circle = new BMap.Circle(pointCenter, fourpoints[tmp1][3]/10, {            strokeColor: "blue",            strokeWeight: 1,            fillColor: "#FFD306",            fillOpacity: 0.0}); 
+	
+	  	 	    map.addOverlay(circle);      //画到地图上面
+	 	    map.setCenter(pointCenter);
+				}
+ var pointCenter=new BMap.Point((fourpoints[4*i][1]+fourpoints[4*i+1][1]+fourpoints[4*i+2][1]+fourpoints[4*i+3][1])/4	,(fourpoints[4*i][2]+fourpoints[4*i+1][2]+fourpoints[4*i+2][2]+fourpoints[4*i+3][2])/4);
+ map.setCenter(pointCenter);
+		map.setZoom	(11);
+});
+}
+	function addpoints()
+		{	
+			for(var i=0;i<json_data.length;i++)	
+			map.addOverlay(markerArray[i]);    //增加点
+				for(var i=0;i<json_data.length;i++)
+		markerArray[i].setAnimation  (BMAP_ANIMATION_BOUNCE);
+		}
+	
+	function setanimation()
+	{
+		map.clearOverlays();
+	}
+
+//	map.addEventListener("click", function(e){    
+ //alert(e.point.lng + ", " + e.point.lat);    
+//});//
+	
+</script>  
+<!--
+/*
+var opts = {    
+ width : 250,     // 信息窗口宽度    
+ height: 100,     // 信息窗口高度    
+ title : "Hello"  // 信息窗口标题   
+}    
+var infoWindow = new BMap.InfoWindow("World", opts);  // 创建信息窗口对象    
+//map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口
+
+
+//画折线
+var polyline = new BMap.Polyline([    
+   new BMap.Point(116.399, 39.910),    
+   new BMap.Point(116.405, 39.920)    
+ ],     {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5}    
+);    
+map.addOverlay(polyline);
+
+
+  //地图拖拽事件监听
+map.addEventListener("dragend", function(){    
+ var center = map.getCenter();    
+ //alert( "地图中心点变更为：" + center.lng + ", " + center.lat);    
+});
+
+//监听函数会得到一个事件对象e，在e中可以获取有关该事件的信息。同时在监听函数中this会指向触发该事件的DOM元素。
+map.addEventListener("click", function(e){    
+ alert(e.point.lng + ", " + e.point.lat);    
+});
+map.addEventListener("zoomend", function(){    
+ alert("地图缩放至：" + this.getZoom() + "级");    
+});
+
+-->
+</body>  
+</html>

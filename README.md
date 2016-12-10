@@ -13,4 +13,8 @@
     通过对特征进行提取，对每名司机进行评估，制作专属“名片”，存储在数据库中，下面是其中一个司机的“名片”
 ![image](/src/idcard.jpg)   
 
-    
+    index.html为前端文件，使用html css javaascript编写，由于github pages为静态网页，该网页的demo 
+    可以到 
+   [This link](https://changrh.tk/diditaxi++) 123
+    查看
+

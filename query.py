@@ -7,3 +7,4 @@ id = int(input())
 data = json.loads(Record.select().where(Record.id == str(id)).get().data)
 for id, key in data.items():
 	print(id + ', ' + key)
+	

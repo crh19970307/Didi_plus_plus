@@ -19,7 +19,7 @@
     index.html为前端文件，使用html css javaascript编写，
     由于github pages为静态网页，该网页的demo可以到 
     
-   [网页链接](http://changruiheng.tk/didi++) 查看
+   [网页链接](http://changruiheng.tk/d++) 查看
    
     通过调用百度地图的API,结合后端处理的数据，对用户进行推荐
     数据库由于大小超出限制，打包上传
